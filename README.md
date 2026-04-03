@@ -8,4 +8,3 @@ A simple app to show the macro and micro nutional facts about every day foods an
 
 ### Data
 All data is publically available via United States Department of Agriculture (USDA) and was fetched through their API. 
- 
