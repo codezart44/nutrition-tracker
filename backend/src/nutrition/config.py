@@ -1,126 +1,97 @@
 
-'''
-fruits
-vegetables
-dairy_and_eggs
-meat_and_poultry
-seafood
-grains_and_cereals
-legumes_and_pulses
-nuts_and_seeds
-condiments_spices_and_oils
-beverages
-'''
+chosen_attributes = [
+    'fdcId',
+    'description',
+    'additionalDescriptions',
+    'dataType',
+    'publishedDate',
+    'foodCategory',
+    'foodCategoryId',
+    'foodNutrients', 
+    'foodMeasures', 
+]
+
+nutrient_attributes = {
+    'nutrientId',
+    'nutrientName',
+    'unitName',
+    'value',
+}
+
+
+# USDA fdc FNDDS database nutrient names to column names in local database
+nutrition_template = {
+    'Proximates': {
+        'Water':'water',
+        'Energy':'energy',
+        'Protein':'protein',
+        'Total lipid (fat)':'fat',
+    },
+    'Carbohydrates': {
+        'Carbohydrate, by difference':'carbohydrate',
+        'Fiber, total dietary':'fiber',
+        'Sugars, total including NLEA':'sugars',
+    },
+    'Minerals': {
+        'Calcium, Ca':'calcium',
+        'Iron, Fe':'iron',
+        'Magnesium, Mg':'magnesium',
+        'Phosphorus, P':'phosphorus',
+        'Potassium, K':'potassium',
+        'Sodium, Na':'sodium',
+        'Zinc, Zn':'zinc',
+        'Copper, Cu':'copper',
+        'Selenium, Se':'selenium',
+    },
+    'Vitamins': {
+        'Vitamin C, total ascorbic acid':'vitamin_C',
+        'Thiamin':'thiamin',
+        'Riboflavin':'riboflavin',
+        'Niacin':'niacin',
+        'Vitamin B-6':'vitamin_B6',
+        'Folate, total':'folate_total',
+        'Folic acid':'folic_acid',
+        'Folate, food':'folate_food',
+        'Folate, DFE':'folate_DFE',
+        'Choline, total':'choline_total',
+        'Vitamin B-12':'vitamin_B12',
+        'Vitamin B-12, added':'vitamin_B12_added',
+        'Vitamin A, RAE':'vitamin_A',
+        'Retinol':'retinol',
+        'Carotene, beta':'carotene_beta',
+        'Carotene, alpha':'carotene_alpha',
+        'Cryptoxanthin, beta':'cryptoxanthin_beta',
+        'Lycopene':'lycopene',
+        'Lutein + zeaxanthin':'lutein_zeaxanthin',
+        'Vitamin E (alpha-tocopherol)':'vitamin_E',
+        'Vitamin E, added':'vitamin_E_added',
+        'Vitamin D (D2 + D3)':'vitamin_D',
+        'Vitamin K (phylloquinone)':'vitamin_K',
+    },
+    'Other Components': {
+        'Fatty acids, total saturated':'sfa_tot',
+        'Fatty acids, total monounsaturated':'mufa_tot',
+        'Fatty acids, total polyunsaturated':'pufa_tot',
+        'Cholesterol':'cholesterol',
+        'Alcohol, ethyl':'alcohol',
+        'Caffeine':'caffeine',
+        'Theobromine':'theobromine',
+    }
+}
+
+
+# fruits
+# vegetables
+# dairy_and_eggs
+# meat_and_poultry
+# seafood
+# grains_and_cereals
+# legumes_and_pulses
+# nuts_and_seeds
+# condiments_spices_and_oils
+# beverages
 
 fruits = {
-    2344665: {'category': 'Fruits', 'subcategory': 'Citrus Fruits', 'item_name': 'Orange',},
-    2344662: {'category': 'Fruits', 'subcategory': 'Citrus Fruits', 'item_name': 'Lemon',},
-    2344664: {'category': 'Fruits', 'subcategory': 'Citrus Fruits', 'item_name': 'Lime',},
-    2344659: {'category': 'Fruits', 'subcategory': 'Citrus Fruits', 'item_name': 'Grapefruit',},
-    2344669: {'category': 'Fruits', 'subcategory': 'Citrus Fruits', 'item_name': 'Tangerine',},
-    2344658: {'category': 'Fruits', 'subcategory': 'Citrus Fruits', 'item_name': 'Clementine',},
-
-    2344777: {'category': 'Fruits', 'subcategory': 'Berries', 'item_name': 'Strawberry'},
-    2344769: {'category': 'Fruits', 'subcategory': 'Berries', 'item_name': 'Blueberry'},
-    2344775: {'category': 'Fruits', 'subcategory': 'Berries', 'item_name': 'Raspberry'},
-    2344767: {'category': 'Fruits', 'subcategory': 'Berries', 'item_name': 'Blackberry'},
-    2344773: {'category': 'Fruits', 'subcategory': 'Berries', 'item_name': 'Cranberry'},
-    2344732: {'category': 'Fruits', 'subcategory': 'Berries', 'item_name': 'Grape'},
-
-    2344719: {'category': 'Fruits', 'subcategory': 'Tropical Fruits', 'item_name': 'Avocado'},
-    2344720: {'category': 'Fruits', 'subcategory': 'Tropical Fruits', 'item_name': 'Banana'},
-    2344755: {'category': 'Fruits', 'subcategory': 'Tropical Fruits', 'item_name': 'Pineapple'},
-    2344737: {'category': 'Fruits', 'subcategory': 'Tropical Fruits', 'item_name': 'Mango'},
-    2344765: {'category': 'Fruits', 'subcategory': 'Tropical Fruits', 'item_name': 'Watermelon'},
-    2344722: {'category': 'Fruits', 'subcategory': 'Tropical Fruits', 'item_name': 'Cantaloupe'},
-    2344736: {'category': 'Fruits', 'subcategory': 'Tropical Fruits', 'item_name': 'Honeydew melon'},
-    2344741: {'category': 'Fruits', 'subcategory': 'Tropical Fruits', 'item_name': 'Papaya'},
-    2344734: {'category': 'Fruits', 'subcategory': 'Tropical Fruits', 'item_name': 'Kiwi fruit'},
-
-    2344711: {'category': 'Fruits', 'subcategory': 'Stone Fruits', 'item_name': 'Apple'},
-    2344744: {'category': 'Fruits', 'subcategory': 'Stone Fruits', 'item_name': 'Peach'},
-    2344749: {'category': 'Fruits', 'subcategory': 'Stone Fruits', 'item_name': 'Pear'},
-    2344760: {'category': 'Fruits', 'subcategory': 'Stone Fruits', 'item_name': 'Plum'},
-    2344740: {'category': 'Fruits', 'subcategory': 'Stone Fruits', 'item_name': 'Nectarine'},
-    2344717: {'category': 'Fruits', 'subcategory': 'Stone Fruits', 'item_name': 'Apricot'},
-    2344726: {'category': 'Fruits', 'subcategory': 'Stone Fruits', 'item_name': 'Cherry'},
-}
-
-vegetables = {
-    2345120: {'category': 'Vegetables', 'subcategory': 'Leafy Greens', 'item_name': 'Spinach'},
-    2345309: {'category': 'Vegetables', 'subcategory': 'Leafy Greens', 'item_name': 'Lettuce'},
-    2345103: {'category': 'Vegetables', 'subcategory': 'Leafy Greens', 'item_name': 'Kale'},
-    2345075: {'category': 'Vegetables', 'subcategory': 'Leafy Greens', 'item_name': 'Swiss Chard'},
-    2345311: {'category': 'Vegetables', 'subcategory': 'Leafy Greens', 'item_name': 'Arugula'},
-    2345077: {'category': 'Vegetables', 'subcategory': 'Leafy Greens', 'item_name': 'Collard Greens'},
-    2345287: {'category': 'Vegetables', 'subcategory': 'Leafy Greens', 'item_name': 'Asparagus'},
-
-    2345151: {'category': 'Vegetables', 'subcategory': 'Cruciferous Vegetables', 'item_name': 'Broccoli'},
-    2345297: {'category': 'Vegetables', 'subcategory': 'Cruciferous Vegetables', 'item_name': 'Cauliflower'},
-    2345292: {'category': 'Vegetables', 'subcategory': 'Cruciferous Vegetables', 'item_name': 'Brussels Sprouts'},
-    2345295: {'category': 'Vegetables', 'subcategory': 'Cruciferous Vegetables', 'item_name': 'Red Cabbage'},
-    2345293: {'category': 'Vegetables', 'subcategory': 'Cruciferous Vegetables', 'item_name': 'Green Cabbage'},
-    2345294: {'category': 'Vegetables', 'subcategory': 'Cruciferous Vegetables', 'item_name': 'Bok Choy'},
-    2345308: {'category': 'Vegetables', 'subcategory': 'Cruciferous Vegetables', 'item_name': 'Kohlrabi'},
-
-    2345173: {'category': 'Vegetables', 'subcategory': 'Root Vegetables', 'item_name': 'Carrots'},
-    2344876: {'category': 'Vegetables', 'subcategory': 'Root Vegetables', 'item_name': 'Potatoes'},
-    2345210: {'category': 'Vegetables', 'subcategory': 'Root Vegetables', 'item_name': 'Sweet Potatoes'},
-    2345323: {'category': 'Vegetables', 'subcategory': 'Root Vegetables', 'item_name': 'Radishes'},
-    2345290: {'category': 'Vegetables', 'subcategory': 'Root Vegetables', 'item_name': 'Beets'},
-    2345329: {'category': 'Vegetables', 'subcategory': 'Root Vegetables', 'item_name': 'Turnips'},
-    # XXXXXXX: {'category': 'Vegetables', 'subcategory': 'Root Vegetables', 'item_name': 'Parsnips'},   # NOTE info about RAW as SR Legacy, or info about cooked in FNDDS
-
-    ## NOTE CONVERT THESE TO THE FORMAT ABOVE!
-    'Alliums': {
-        'Onions': 2345315,                      # red by default, others can be foun in SR Legacy / Foundation
-        'Garlic': 2345306,
-        # 'Shallots': 1,                        # found in SR Legacy
-        # 'Leeks': 1,                           # only cooked, otherwise SR legacy
-        'Scallions': 2345314,
-    },
-    'Fruiting Vegetables': {
-        'Tomatoes': 2345232,
-        'Bell Peppers': 2345319,
-        # 'Red chili': 1,                       # SR Legacy
-        'Chili (Hot Pepper)': 2345623,          # General (actually jalapeno??)
-        'Eggplant': 2345305,
-        # 'Tomatillos': 1,                      # SR Legacy
-        'Sweet Corn': 2345303,
-    },
-    'Legumes': {
-        'Green Beans': 2345289,
-        'Green Peas': 2345317,
-        'Lentils': 2342898, 
-        'Chickpeas': 2342889,
-        'Kidney Beans': 2342854,
-        'Black Beans': 2342834,
-    },
-    'Squash and Gourds': {
-        'Zucchini (Green Squash)': 2345328, 
-        'Yellow Squash': 2345327,
-        'Winter Squash': 2345206,               # includes hubbard;gourd;acorn;pumpkin;butternut. More details in SR legacy
-        # 'Butternut Squash': 1,
-        # 'Acorn Squash': 1,
-        # 'Pumpkin': 1,
-        'Cucumbers': 2345304,
-    },
-
-}
-
-
-
-
-
-
-
-
-
-###################################################################################################
-###################################################################################################
-###################################################################################################
-
-fruits_structure = {
     'Citrus Fruits': {
         'Orange': 2344665,
         'Lemon': 2344662,
@@ -260,26 +231,23 @@ meat_and_poultry = {
 }
 
 seafood = {
-    'Seafood': {
-        'Fish': {
-            'Salmon': 2341700,
-            'Tuna': 2341724,
-            'Cod': 2341655,
-            'Trout': 2341717,
-            'Pike': 2341691,
-            'Bass': 2341709,
-            'Mackerel': 2341678,
-        },
-        'Shellfish': {
-            'Shrimp': 2341775,
-            'Crab': 2341759,
-            'Lobster': 2341764,
-            'Clams': 2341753,
-            'Oyster': 2341766,
-        },
-    }
+    'Fish': {
+        'Salmon': 2341700,
+        'Tuna': 2341724,
+        'Cod': 2341655,
+        'Trout': 2341717,
+        'Pike': 2341691,
+        'Bass': 2341709,
+        'Mackerel': 2341678,
+    },
+    'Shellfish': {
+        'Shrimp': 2341775,
+        'Crab': 2341759,
+        'Lobster': 2341764,
+        'Clams': 2341753,
+        'Oyster': 2341766,
+    },
 }
-
 
 # Divide into, rice, pasta, flour (ground), and other (quinoa etc)
 grains_and_cereals = {
@@ -391,10 +359,6 @@ beverages = {
 #     'Miso': 1,
 #     'Soy Milk': 1,
 # }
-
-
-
-
 
 
 # meat_and_poultry = {
