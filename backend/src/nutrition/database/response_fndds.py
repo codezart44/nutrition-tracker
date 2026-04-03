@@ -9,27 +9,27 @@ import os
 from pprint import pprint
 
 
-from config_data_formatting import (
+from backend.src.nutrition.database.config_data_formatting import (
     chosen_item_attributes, 
     nutrient_attributes, 
     nutrient_categories,
     measure_attributes,
 )
 
-from functional_queries import (
+from backend.src.nutrition.database.functional_queries import (
     get_col_names,
     insert_row,
     insert_multiple_rows,
     delete_row,
 )
 
-from config_api_setup import (
+from backend.src.nutrition.database.config_api_setup import (
     url, 
     fdc_parameters,
     # fdc_id_test,                # fdc id for Cheddar cheese
 )
 
-from config_fndds_ids import (
+from backend.src.nutrition.database.config_fndds_ids import (
     fruits,
     vegetables,
     dairy_and_eggs,
