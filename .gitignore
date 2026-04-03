@@ -1,0 +1,33 @@
+# Python / Flask
+.venv/
+__pycache__/
+*.py[cod]
+.env
+instance/
+.pytest_cache/
+.mypy_cache/
+*.db
+*.sqlite3
+
+*.pyc
+
+# Vite / Svelte / TypeScript
+node_modules/
+dist/
+*.local
+*.log
+.svelte-kit/
+
+# Common OS / editor
+*.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+food_icons/*
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.eps
+*.txt
