@@ -9,3 +9,5 @@ jupyter
 flask
 flask-cors
 flask-session
+
+requests

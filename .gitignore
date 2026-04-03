@@ -8,8 +8,12 @@ instance/
 .mypy_cache/
 *.db
 *.sqlite3
-
+*/env.sh
 *.pyc
+*.egg-info
+.depr/
+*.csv
+*/data/
 
 # Vite / Svelte / TypeScript
 node_modules/

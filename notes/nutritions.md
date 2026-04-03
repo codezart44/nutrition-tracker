@@ -1,4 +1,7 @@
 
+## Complement foods from FNDDS with SR Legacy foods (should cover majority)
+## Deetermine wheather nutrition format is compatible with FNDDS
+
 all nutritonal facts per 100g of food
 
 Category: Foundation
@@ -268,3 +271,76 @@ Lipids:
           Fatty acids, total polyunsaturated	1.18	g	Summed						
           Fatty acids, total trans	1.14	g	Summed						
           Cholesterol
+
+
+
+
+
+### Survey (FNDDS)
+- fdcId
+- description
+- commonNames XXX
+- additionalDescriptions
+- dataType
+- foodCode
+- publishedDate
+- foodCategory
+- foodCategoryId
+- allHighlightFields XXX
+- score XXX
+- microbes XXX
+- foodNutrients 
+- finalFoodInputFoods XXX
+- foodMeasures 
+- foodAttributes XXX
+- foodAttributeTypes XXX
+- foodVersionIds XXX
+
+### NOTE FNDDS:
+- fdcId
+- description
+- scientificName
+- commonNames
+- additionalDescriptions
+- dataType
+- ndbNumber
+- publishedDate
+- foodCategory
+- mostRecentAcquisitionDate
+- allHighlightFields
+- score
+- microbes
+- foodNutrients
+- finalFoodInputFoods
+- foodMeasures
+- foodAttributes
+- foodAttributeTypes
+- foodVersionIds
+
+### NOTE SR Legacy
+- fdcId
+- description
+- scientificName
+- commonNames
+- additionalDescriptions
+- dataType
+- ndbNumber
+- publishedDate
+- foodCategory
+- allHighlightFields
+- score
+- microbes
+- foodNutrients
+- finalFoodInputFoods
+- foodMeasures
+- foodAttributes
+- foodAttributeTypes
+- foodVersionIds
+
+totalHits
+currentPage
+totalPages
+pageList
+foodSearchCriteria
+foods
+aggregations

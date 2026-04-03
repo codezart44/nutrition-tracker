@@ -3,13 +3,12 @@ from flask_cors import CORS
 from flask_session import Session
 
 # import blueprints
-from routes.test_api import test_blueprint
-from routes.fetch_api import fetch_blueprint
-
+from nutrition.routes.test_api import test_blueprint
+from nutrition.routes.fetch_api import fetch_blueprint
 
 
 def create_app() -> Flask:
-    app = Flask(__file__)
+    app = Flask(__name__)
 
     CORS(app=app)
 

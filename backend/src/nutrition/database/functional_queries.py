@@ -5,117 +5,59 @@ import numpy as np
 import os
 import json
 
-
-
 def get_col_names(table_name: str, con: sqlite3.Connection) -> list[str]:
-    '''
-    '''
     cur = con.cursor()
-
-    sql_get_cols = f"""
-    --sql
-    PRAGMA table_info({table_name})
-    ;
-    """
+    sql_get_cols = f"PRAGMA table_info({table_name})"
     cur.execute(sql_get_cols)
     col_info = cur.fetchall()
     cur.close()
-
     col_names = [info[1] for info in col_info]
-
     return col_names
 
-def update_row(table_name:str, row_id:int, col_names:list, row:list, con:sqlite3.Connection) -> None:
-    '''
-    '''
+def update_one(table_name:str, row_id:int, col_names:list, row:list, con:sqlite3.Connection) -> None:
     assert row[0] == row_id
     args = row[1:]
-
     cur = con.cursor()
     cols_sql = ', '.join([f'{col} = ?' for col in col_names[1:]])
-
-    sql_update = f"""
-    --sql
-    UPDATE {table_name} SET {cols_sql}
-        WHERE fdc_id = {row_id}  
-    ;
-    """
+    sql_update = f"UPDATE {table_name} SET {cols_sql} WHERE fdc_id = {row_id}"
     cur.execute(sql_update, args)
     cur.close()
-
     con.commit()
 
-def insert_row(table_name:str, col_names:list, row:list, con:sqlite3.Connection) -> None:
-    '''
-    '''
+def insert_one(table_name:str, col_names:list, row:list, con:sqlite3.Connection) -> None:
     cur = con.cursor()
     cols_sql = ', '.join(col_names)
     params_sql = ','.join(['?' for _ in col_names])
-
-    sql_insert = f"""
-    --sql
-    INSERT INTO {table_name} ({cols_sql}) 
-        VALUES ({params_sql})  
-    ;
-    """
+    sql_insert = f"INSERT INTO {table_name} ({cols_sql}) VALUES ({params_sql})"
     cur.execute(sql_insert, row)
     cur.close()
-
     con.commit()
 
-def insert_multiple_rows(table_name:str, col_names:list, rows:list[list], con:sqlite3.Connection) -> None:
-    '''
-    '''
+def insert_many(table_name:str, col_names:list, rows:list[list], con:sqlite3.Connection) -> None:
     cur = con.cursor()
     cols_sql = ', '.join(col_names)
     params_sql = ','.join(['?' for _ in col_names])
-
-    sql_insert = f"""
-    --sql
-    INSERT INTO {table_name} ({cols_sql}) 
-        VALUES ({params_sql})  
-    ;
-    """
+    sql_insert = f"INSERT INTO {table_name} ({cols_sql}) VALUES ({params_sql})"
     cur.executemany(sql_insert, rows)
     cur.close()
-
     con.commit()
 
-def delete_row(table_name:str, row_id:int, con:sqlite3.Connection) -> None:
-    '''
-    '''
+def delete_one(table_name:str, row_id:int, con:sqlite3.Connection) -> None:
     cur = con.cursor()
-
-    sql_delete = f"""
-    --sql
-    DELETE FROM {table_name} WHERE fdc_id = ?
-    ;
-    """
+    sql_delete = f"DELETE FROM {table_name} WHERE fdc_id = ?"
     cur.execute(sql_delete, (row_id, ))
     cur.close()
     con.commit()
 
-def get_rows(table_name:str, row_ids:list, con:sqlite3.Connection) -> list:
-    '''
-    '''
+def select_one(table_name:str, row_ids:list, con:sqlite3.Connection) -> list:
     cur = con.cursor()
     params_sql = ','.join(['?' for id in row_ids])
-
-    sql_fetch = f"""
-    --sql
-    SELECT * FROM {table_name}
-        WHERE fdc_id in ({params_sql})
-    ;
-    """
+    sql_fetch = "SELECT * FROM {table_name} WHERE fdc_id in ({params_sql})"
     cur.execute(sql_fetch, row_ids)
     rows = cur.fetchall()
-
     cur.close()
     con.commit()
-
     return rows
-
-
 
 
 
