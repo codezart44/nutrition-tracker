@@ -6,7 +6,6 @@ from flask_session import Session
 from nutrition.routes.test_api import test_blueprint
 from nutrition.routes.fetch_api import fetch_blueprint
 
-
 def create_app() -> Flask:
     app = Flask(__name__)
 
