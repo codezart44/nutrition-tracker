@@ -1,5 +1,38 @@
 import sqlite3
 
+def select_food(con: sqlite3.Connection, fdc_ids: list[int]) -> list[dict]:
+    if not fdc_ids: return []
+    parameters = fdc_ids
+    placeholders = ",".join(["?"] * len(fdc_ids))
+    sql = f"""
+        SELECT 
+            fdc_id,
+            data_source,
+            publication_date,
+            description,
+            category_id,
+            category_name
+        FROM food 
+        WHERE fdc_id IN ({placeholders})
+    """
+    cur = con.execute(sql, parameters)
+    return [dict(r) for r in cur.fetchall()]
+
+def select_nutrient(con: sqlite3.Connection, nutrient_ids: list[int]) -> list[dict]:
+    if not nutrient_ids: return []
+    parameters = nutrient_ids
+    placeholders = ",".join(["?"] * len(nutrient_ids))
+    sql = f"""
+        SELECT 
+            nutrient_id,
+            nutrient_name,
+            nutrient_unit
+        FROM nutrient
+        WHERE nutrient_id IN ({placeholders});
+    """
+    cur = con.execute(sql, parameters)
+    return [dict(r) for r in cur.fetchall()]
+
 def select_food_nutrient(
         con:sqlite3.Connection, 
         fdc_ids:list[int]
@@ -27,7 +60,7 @@ def select_food_nutrient(
     cur = con.execute(sql, parameters)
     return [dict(r) for r in cur.fetchall()]
 
-def select_food_nutrient_summed(
+def select_food_nutrient_total(
         con: sqlite3.Connection, 
         fdc_ids: list[int], 
         amounts: list[int],
@@ -55,35 +88,3 @@ def select_food_nutrient_summed(
     cur = con.execute(sql, parameters)
     return [dict(r) for r in cur.fetchall()]
 
-def select_food(con: sqlite3.Connection, fdc_ids: list[int]) -> list[dict]:
-    if not fdc_ids: return []
-    parameters = fdc_ids
-    placeholders = ",".join(["?"] * len(fdc_ids))
-    sql = f"""
-        SELECT 
-            fdc_id,
-            data_source,
-            publication_date,
-            description,
-            category_id,
-            category_name
-        FROM food 
-        WHERE fdc_id IN ({placeholders})
-    """
-    cur = con.execute(sql, parameters)
-    return [dict(r) for r in cur.fetchall()]
-
-def select_nutrient(con: sqlite3.Connection, nut_ids: list[int]) -> list[dict]:
-    if not nut_ids: return []
-    parameters = nut_ids
-    placeholders = ",".join(["?"] * len(nut_ids))
-    sql = f"""
-        SELECT 
-            nutrient_id,
-            nutrient_name,
-            nutrient_unit
-        FROM nutrient
-        WHERE nutrient_id IN ({placeholders});
-    """
-    cur = con.execute(sql, parameters)
-    return [dict(r) for r in cur.fetchall()]
