@@ -13,7 +13,7 @@ def select_food(con: sqlite3.Connection, fdc_ids: list[int]) -> list[dict]:
             category_id,
             category_name
         FROM food 
-        WHERE fdc_id IN ({placeholders})
+        WHERE fdc_id IN ({placeholders});
     """
     cur = con.execute(sql, parameters)
     return [dict(r) for r in cur.fetchall()]
@@ -88,3 +88,28 @@ def select_food_nutrient_total(
     cur = con.execute(sql, parameters)
     return [dict(r) for r in cur.fetchall()]
 
+def select_food_description_like(
+        con: sqlite3.Connection,
+        pattern: str,
+    ) -> list[dict]:
+    if not pattern: return []
+    if len(pattern) < 2: return []
+    pattern = pattern.strip()
+    pattern = " ".join(pattern.split())  # normalizes "aa   b" -> "aa b"
+    parameters = (pattern,)
+    sql = """
+        SELECT
+            f.fdc_id,
+            f.data_source,
+            f.publication_date,
+            f.description,
+            f.category_id,
+            f.category_name
+        FROM food_fts fts
+        JOIN food f ON f.fdc_id = fts.rowid
+        WHERE food_fts MATCH ?
+        ORDER BY bm25(food_fts)
+        LIMIT 50;
+    """
+    cur = con.execute(sql, parameters)
+    return [dict(r) for r in cur.fetchall()]
