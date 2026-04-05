@@ -28,7 +28,8 @@ dist/
 !.vscode/extensions.json
 .idea/
 
-food_icons/*
+frontend/public/*
+# /food_icons/*
 *.svg
 *.png
 *.jpg

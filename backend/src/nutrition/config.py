@@ -1,3 +1,18 @@
+from pathlib import Path
+import os
+
+BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    raise KeyError
+
+class Config:
+    SECRET_KEY = SECRET_KEY
+    DB_PATH = BACKEND_DIR / "data/db/food.db"
+
+
+
+
 
 chosen_attributes = [
     'fdcId',
