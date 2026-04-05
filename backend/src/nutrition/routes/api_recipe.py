@@ -11,8 +11,8 @@ blueprint_recipe = Blueprint("recipe", __name__, url_prefix="/recipe")
 @blueprint_recipe.post("/nutrients")
 def get_recipe_nutrients():
     payload = request.get_json() or {}
-    fdc_ids = validate_list_of( int,         payload.get("fdc_ids", []))
-    amounts = validate_list_of((int, float), payload.get("amounts", []))
+    fdc_ids = validate_list_of( int,         payload.get("fdc_ids"))
+    amounts = validate_list_of((int, float), payload.get("amounts"))
     fdc_ids, amounts = validate_equal_lengths(fdc_ids, amounts)
 
     with get_connection(current_app.config["DB_PATH"]) as con:

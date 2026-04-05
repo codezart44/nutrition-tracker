@@ -11,7 +11,7 @@ blueprint_nutrient = Blueprint("nutrient", __name__, url_prefix="/nutrients")
 @blueprint_nutrient.post("")
 def get_nutrients():
     payload = request.get_json() or {}
-    nutrient_ids = validate_list_of(int, payload.get("nutrient_ids", []))
+    nutrient_ids = validate_list_of(int, payload.get("nutrient_ids"))
 
     with get_connection(current_app.config["DB_PATH"]) as con:
         result = select_nutrient(con, nutrient_ids)
